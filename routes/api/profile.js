@@ -7,6 +7,7 @@ const config = require('config');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
+const Post = require('../../models/Post')
 
 // @route    GET api/profile/me
 // @desc     Get current user profile
@@ -73,7 +74,7 @@ router.post('/', [auth,
         if (status) profileFields.status = status;
         if (githubusername) profileFields.githubusername = githubusername;
         if (skills) {
-            profileFields.skills = skills.split(',').map(skill => skill.trim());
+            profileFields.skills = (skills.toString()).split(',').map(skill => skill.trim());
         }
 
 
@@ -170,10 +171,13 @@ router.delete('/', auth, async (req, res) => {
 
     try {
 
+        // Remove all posts of user
+        await Post.deleteMany({ user: req.user.id });
         // Remove profile
         await Profile.findOneAndRemove({ user: req.user.id });
         // Remove user
         await User.findByIdAndRemove({ _id: req.user.id });
+        // Remove all posts
 
 
         res.json({ msg: "User deleted." });

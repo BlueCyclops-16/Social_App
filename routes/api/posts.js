@@ -61,7 +61,7 @@ router.get('/', auth, async (req, res) => {
         console.error(err.message);
         res.status(500).send("Server Error");
     }
-})
+});
 
 
 // @route    GET api/posts/:id
@@ -70,8 +70,6 @@ router.get('/', auth, async (req, res) => {
 router.get('/:id', auth, async (req, res) => {
 
     try {
-
-        // We are getting all the posts and also sorting them in latest order (if we want to get oldest first we can do date: 1)
         const post = await Post.findById(req.params.id);
 
         if (!post) {
@@ -135,7 +133,6 @@ router.delete('/:id', auth, async (req, res) => {
 router.put('/like/:id', auth, async (req, res) => {
 
     try {
-
         const post = await Post.findById(req.params.id);
 
         // Check if the post is already liked by the user.

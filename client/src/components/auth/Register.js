@@ -1,11 +1,12 @@
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { connect } from 'react-redux';
 import { setAlert } from "../../actions/alert";
+import { register } from '../../actions/auth'
 import PropTypes from 'prop-types'
 
 
-export const Register = ({ setAlert }) => {
+export const Register = ({ setAlert, register, isAuthenticated }) => {
 
   const [formData, setFormData] = useState({
     name: '',
@@ -27,7 +28,9 @@ export const Register = ({ setAlert }) => {
     if (password !== password2) {
       await setAlert("Passwords don't match.", 'danger');
     } else {
-      console.log("SUCCESS");
+      // console.log("SUCCESS");
+
+      register({ name, email, password });
 
       // Below code will happen in redux this was just for demo
       // const newUser = {
@@ -54,7 +57,11 @@ export const Register = ({ setAlert }) => {
       // }
 
     }
+  }
 
+  // Navigate id registered successfully
+  if(isAuthenticated){
+    return <Navigate to='dashboard' />
   }
 
   return (
@@ -80,7 +87,7 @@ export const Register = ({ setAlert }) => {
             type="password"
             placeholder="Password"
             name="password"
-            minLength="6"
+            minLength="5"
             value={password}
             onChange={e => handleChange(e)}
             required
@@ -91,7 +98,7 @@ export const Register = ({ setAlert }) => {
             type="password"
             placeholder="Confirm Password"
             name="password2"
-            minLength="6"
+            minLength="5"
             value={password2}
             onChange={e => handleChange(e)}
             required
@@ -107,8 +114,14 @@ export const Register = ({ setAlert }) => {
 };
 
 Register.propTypes = {
-  setAlert: PropTypes.func.isRequired
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
 }
 
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
 
-export default connect(null, { setAlert })(Register);
+
+export default connect(mapStateToProps, { setAlert, register })(Register);
