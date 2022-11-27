@@ -13,8 +13,9 @@ import EditProfile from "./components/profile-forms/EditProfile";
 import AddExperience from "./components/profile-forms/AddExperience";
 import Profile from './components/profile/Profile';
 import Profiles from "./components/profiles/Profiles";
-import Post from "./components/posts/Post";
+import Posts from "./components/posts/Posts";
 import AddEducation from "./components/profile-forms/AddEducation";
+import Post from "./components/post/Post";
 // Redux
 import { connect } from "react-redux";
 import store from "./store";
@@ -142,6 +143,17 @@ const App = ({ auth: { isAuthenticated, loading } }) => {
             element={
               <section className="container">
                 <PrivateRoute isAuthenticated={isAuthenticated} loading={loading}>
+                  <Posts />
+                </PrivateRoute>
+              </section>
+            }
+          />
+
+          <Route
+            path="/posts/:id"
+            element={
+              <section className="container">
+                <PrivateRoute isAuthenticated={isAuthenticated} loading={loading}>
                   <Post />
                 </PrivateRoute>
               </section>
@@ -154,7 +166,7 @@ const App = ({ auth: { isAuthenticated, loading } }) => {
   );
 };
 
-Navbar.propTypes = {
+App.propTypes = {
   auth: PropTypes.object.isRequired,
 };
 

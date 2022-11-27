@@ -265,10 +265,3 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
 
 
 module.exports = router;
-
-
-// Ayush token
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2NWU1OWE1MzFlMmY0ZWVkMjc0Mjk0In0sImlhdCI6MTY2NzY0NDI2MywiZXhwIjoxNzAzNjQ0MjYzfQ.5o9BOGbhh6tZ9bKDIpkZvStL1p07zi81_8KwIj_O23k
-
-// Daksh TOken
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2NWU0ZGY1MzFlMmY0ZWVkMjc0MjhkIn0sImlhdCI6MTY2NzY0NTI2NiwiZXhwIjoxNzAzNjQ1MjY2fQ.Bju3ifvpfKsVTjRoqdHU6mjzMNC2Tt_Fm2Lrq4uf0VAcl

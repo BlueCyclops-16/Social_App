@@ -61,7 +61,7 @@ export const Register = ({ setAlert, register, isAuthenticated }) => {
 
   // Navigate id registered successfully
   if(isAuthenticated){
-    return <Navigate to='dashboard' />
+    return <Navigate to='/dashboard' />
   }
 
   return (
